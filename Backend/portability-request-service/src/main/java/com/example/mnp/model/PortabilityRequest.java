@@ -1,48 +1,59 @@
 package com.example.mnp.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "portability_requests")
+@Table(name = "portability_request")
 public class PortabilityRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "request_id")
-    private Integer requestId;
+    private Long id;
 
-    @Column(name = "subscriber_id", nullable = false)
-    private Integer subscriberId;
+    private Long msisdn;
+    private Long imsi;
+    private String name;
 
-    @Column(name = "old_provider")
-    private String oldProvider;
+    @Column(name = "id_type")
+    private String idType;
 
-    @Column(name = "new_provider")
-    private String newProvider;
+    @Column(name = "id_number")
+    private String idNumber;
 
-    @Column(name = "status", length = 20)
-    private String status;
+    @Column(name = "current_provider_id")
+    private Integer currentProviderId;
 
-    @Column(name = "request_date")
-    private LocalDateTime requestDate = LocalDateTime.now();
+    @Column(name = "service_type")
+    private String serviceType;
 
-    @Column(name = "request_ref_id", unique = true, length = 50)
-    private String requestRefId;
+    @Column(name = "request_reference_id")
+    private String requestReferenceId;
 
-    // Getters & Setters
-    public Integer getRequestId() { return requestId; }
-    public void setRequestId(Integer requestId) { this.requestId = requestId; }
-    public Integer getSubscriberId() { return subscriberId; }
-    public void setSubscriberId(Integer subscriberId) { this.subscriberId = subscriberId; }
-    public String getOldProvider() { return oldProvider; }
-    public void setOldProvider(String oldProvider) { this.oldProvider = oldProvider; }
-    public String getNewProvider() { return newProvider; }
-    public void setNewProvider(String newProvider) { this.newProvider = newProvider; }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-    public LocalDateTime getRequestDate() { return requestDate; }
-    public void setRequestDate(LocalDateTime requestDate) { this.requestDate = requestDate; }
-    public String getRequestRefId() { return requestRefId; }
-    public void setRequestRefId(String requestRefId) { this.requestRefId = requestRefId; }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Long getMsisdn() { return msisdn; }
+    public void setMsisdn(Long msisdn) { this.msisdn = msisdn; }
+
+    public Long getImsi() { return imsi; }
+    public void setImsi(Long imsi) { this.imsi = imsi; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getIdType() { return idType; }
+    public void setIdType(String idType) { this.idType = idType; }
+
+    public String getIdNumber() { return idNumber; }
+    public void setIdNumber(String idNumber) { this.idNumber = idNumber; }
+
+    public Integer getCurrentProviderId() { return currentProviderId; }
+    public void setCurrentProviderId(Integer currentProviderId) { this.currentProviderId = currentProviderId; }
+
+    public String getServiceType() { return serviceType; }
+    public void setServiceType(String serviceType) { this.serviceType = serviceType; }
+
+    public String getRequestReferenceId() { return requestReferenceId; }
+    public void setRequestReferenceId(String requestReferenceId) { this.requestReferenceId = requestReferenceId; }
 }
