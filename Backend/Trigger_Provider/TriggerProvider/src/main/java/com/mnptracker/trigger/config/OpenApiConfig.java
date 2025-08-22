@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OpenApiConfig {
-  @Bean
-  public OpenAPI api() {
+    @Bean
+    OpenAPI api() {
     return new OpenAPI()
         .info(new Info().title("Provider Communication Service API")
             .description("Inter-Provider MNP communications")

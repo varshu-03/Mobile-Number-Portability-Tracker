@@ -3,9 +3,9 @@ server:
 
 spring:
   application:
-    name: provider-communication-service
+    name: trigger-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/MNP
+    url: jdbc:postgresql://localhost:5432/mnp
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
@@ -14,7 +14,7 @@ spring:
       ddl-auto: update
     show-sql: true
   config:
-    import: optional:configserver:
+    import: "optional:configserver:"
 
 # Eureka client
 eureka:
@@ -47,3 +47,4 @@ management:
 
 security:
   shared-secret: changeme
+debug: true

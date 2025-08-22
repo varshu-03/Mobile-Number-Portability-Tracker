@@ -1,16 +1,10 @@
 package com.mnptracker.trigger.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
 import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "api_request_log")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class APIRequestLog {
 
     @Id
@@ -18,28 +12,68 @@ public class APIRequestLog {
     private Long id;
 
     @Column(nullable = false, length = 10)
-    private String direction;  // "OUTBOUND" or "INBOUND"
+    private String direction;
 
     @Column(nullable = false)
-    private String url;  // Called URL or service name
+    private String url;
 
     @Column(columnDefinition = "jsonb")
-    private String requestBody;  // JSON payload sent
+    private String requestBody;
 
     @Column(columnDefinition = "jsonb")
-    private String responseBody;  // JSON response received
+    private String responseBody;
 
     @Column(name = "http_status")
-    private Integer httpStatus;  // HTTP status code
+    private Integer httpStatus;
 
     @Column(nullable = false, length = 50)
-    private String correlationId;  // Links request & response
+    private String correlationId;
 
     @ManyToOne
     @JoinColumn(name = "provider_id", referencedColumnName = "provider_id")
-    private Provider provider;  // FK to Provider table
+    private Provider provider;
 
     @Column(nullable = false)
     private OffsetDateTime createdAt;
-}
 
+    private APIRequestLog(Builder builder) {
+        this.id = builder.id;
+        this.direction = builder.direction;
+        this.url = builder.url;
+        this.requestBody = builder.requestBody;
+        this.responseBody = builder.responseBody;
+        this.httpStatus = builder.httpStatus;
+        this.correlationId = builder.correlationId;
+        this.provider = builder.provider;
+        this.createdAt = builder.createdAt;
+    }
+
+    // ✅ Add static factory method
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String direction;
+        private String url;
+        private String requestBody;
+        private String responseBody;
+        private Integer httpStatus;
+        private String correlationId;
+        private Provider provider;
+        private OffsetDateTime createdAt;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder direction(String direction) { this.direction = direction; return this; }
+        public Builder url(String url) { this.url = url; return this; }
+        public Builder requestBody(String requestBody) { this.requestBody = requestBody; return this; }
+        public Builder responseBody(String responseBody) { this.responseBody = responseBody; return this; }
+        public Builder httpStatus(Integer httpStatus) { this.httpStatus = httpStatus; return this; }
+        public Builder correlationId(String correlationId) { this.correlationId = correlationId; return this; }
+        public Builder provider(Provider provider) { this.provider = provider; return this; }
+        public Builder createdAt(OffsetDateTime createdAt) { this.createdAt = createdAt; return this; }
+
+        public APIRequestLog build() { return new APIRequestLog(this); }
+    }
+}

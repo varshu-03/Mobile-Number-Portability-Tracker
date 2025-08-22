@@ -12,8 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-  @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
       .csrf(csrf -> csrf.disable())
       .authorizeHttpRequests(auth -> auth
@@ -23,8 +23,8 @@ public class SecurityConfig {
     return http.build();
   }
 
-  @Bean
-  public UserDetailsService users() {
+    @Bean
+    UserDetailsService users() {
     return new InMemoryUserDetailsManager(
         User.withUsername("provider_user").password("{noop}secret_sauce").roles("API").build()
     );
