@@ -2,7 +2,9 @@ package com.example.mnp.repository;
 
 import com.example.mnp.model.Subscriber;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface SubscriberRepository extends JpaRepository<Subscriber, Integer> {
-    Subscriber findByMsisdn(Long msisdn);
+@Repository
+public interface SubscriberRepository extends JpaRepository<Subscriber, Long> {
+    Subscriber findByMsisdn(Long msisdn); // For validation by MSISDN
 }

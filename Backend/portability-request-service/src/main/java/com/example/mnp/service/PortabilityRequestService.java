@@ -16,7 +16,7 @@ public class PortabilityRequestService {
 
     /**
      * Create a new portability request
-     * Generates a unique requestReferenceId
+     * Generates a unique requestReferenceId and sets default status
      *
      * @param request PortabilityRequest object from controller
      * @return saved PortabilityRequest object
@@ -24,18 +24,28 @@ public class PortabilityRequestService {
     public PortabilityRequest createRequest(PortabilityRequest request) {
         // Generate a unique reference ID for the request
         request.setRequestReferenceId(UUID.randomUUID().toString());
+
+        // Set default status to "pending" if not provided
+        if (request.getStatus() == null || request.getStatus().isEmpty()) {
+            request.setStatus("pending");
+        }
+
+        // Set default reason code as empty if not provided
+        if (request.getReasonCode() == null) {
+            request.setReasonCode("");
+        }
+
         // Save the request in the database
         return repository.save(request);
     }
 
     /**
-     * Retrieve a portability request by its ID
+     * Get a portability request by subscriber ID
      *
-     * @param id request ID
-     * @return PortabilityRequest object if found, otherwise null
+     * @param id Subscriber ID
+     * @return Optional containing the request if found
      */
-    public PortabilityRequest getRequestById(Long id) {
-        Optional<PortabilityRequest> request = repository.findById(id);
-        return request.orElse(null); // Returns null if not found
+    public Optional<PortabilityRequest> getRequestById(Long id) {
+        return repository.findById(id);
     }
 }

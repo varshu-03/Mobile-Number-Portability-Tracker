@@ -7,11 +7,16 @@ import jakarta.persistence.*;
 public class PortabilityRequest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="subscriber_id", nullable=false)
     private Long id;
 
+    @Column(name="msisdn", nullable=false)
     private Long msisdn;
+
+    @Column(name="imsi", nullable=false)
     private Long imsi;
+
+    @Column(name="name", nullable=false)
     private String name;
 
     @Column(name = "id_type")
@@ -28,6 +33,13 @@ public class PortabilityRequest {
 
     @Column(name = "request_reference_id")
     private String requestReferenceId;
+
+    // New fields
+    @Column(name = "status")
+    private String status;  // e.g., "pending", "approved", "rejected"
+
+    @Column(name = "reason_code")
+    private String reasonCode;  // Optional reason for rejection or pending
 
     // Getters and Setters
     public Long getId() { return id; }
@@ -56,4 +68,10 @@ public class PortabilityRequest {
 
     public String getRequestReferenceId() { return requestReferenceId; }
     public void setRequestReferenceId(String requestReferenceId) { this.requestReferenceId = requestReferenceId; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public String getReasonCode() { return reasonCode; }
+    public void setReasonCode(String reasonCode) { this.reasonCode = reasonCode; }
 }
