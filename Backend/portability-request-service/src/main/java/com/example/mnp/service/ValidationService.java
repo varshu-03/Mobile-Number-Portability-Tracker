@@ -2,23 +2,19 @@ package com.example.mnp.service;
 
 import com.example.mnp.model.Subscriber;
 import com.example.mnp.repository.SubscriberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ValidationService {
-    private final SubscriberRepository subscriberRepo;
 
-    public ValidationService(SubscriberRepository subscriberRepo) {
-        this.subscriberRepo = subscriberRepo;
-    }
+    @Autowired
+    private SubscriberRepository subscriberRepo;
 
-    public boolean validate(Long msisdn, Long imsi, String idType, String idNumber) {
+    public boolean validateSubscriber(Long msisdn, Long imsi, String idType, String idNumber) {
         Subscriber sub = subscriberRepo.findByMsisdn(msisdn);
-        if (sub == null) return false;
-        if (!sub.getImsi().equals(imsi)) return false;
-        if (!sub.getIdType().equalsIgnoreCase(idType)) return false;
-        if (!sub.getIdNumber().equalsIgnoreCase(idNumber)) return false;
-        return true;
+        if(sub == null) return false;
+        return sub.getImsi().equals(imsi) && sub.getIdType().equalsIgnoreCase(idType)
+               && sub.getIdNumber().equalsIgnoreCase(idNumber);
     }
 }
-

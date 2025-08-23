@@ -6,7 +6,7 @@ spring:
     name: portability-request-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/MNP_db
+    url: jdbc:postgresql://localhost:5432/MNP_tracker
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver

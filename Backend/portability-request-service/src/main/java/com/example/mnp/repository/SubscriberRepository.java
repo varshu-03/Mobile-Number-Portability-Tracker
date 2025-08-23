@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SubscriberRepository extends JpaRepository<Subscriber, Long> {
-    Subscriber findByMsisdn(Long msisdn); // For validation by MSISDN
+    Subscriber findByMsisdn(Long msisdn);
 }
